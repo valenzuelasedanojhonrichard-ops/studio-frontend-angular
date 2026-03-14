@@ -24,10 +24,15 @@ export class LoginComponent {
   login() {
     this.auth.login(this.username, this.password)
       .subscribe(res => {
+
         this.auth.saveToken(res.token);
 
-        // 👇 FALTABA ESTO
+        // guardar rol
+        localStorage.setItem('role', res.role);
+
         this.router.navigate(['/dashboard']);
+
       });
   }
+
 }

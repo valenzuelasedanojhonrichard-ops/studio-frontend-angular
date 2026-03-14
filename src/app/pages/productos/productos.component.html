@@ -1,0 +1,31 @@
+<h2>Productos</h2>
+
+<button (click)="mostrarFormulario()">Nuevo Producto</button>
+
+<div *ngIf="formVisible">
+
+  <h3>Nuevo Producto</h3>
+
+  <input type="text" placeholder="Nombre" [(ngModel)]="productos.nombre">
+
+  <input type="number" placeholder="Precio" [(ngModel)]="productos.precio">
+
+  <button (click)="guardar()">Guardar</button>
+
+</div>
+
+<table border="1">
+
+<tr>
+<th>ID</th>
+<th>Nombre</th>
+<th>Precio</th>
+</tr>
+
+<tr *ngFor="let p of productos">
+<td>{{p.id}}</td>
+<td>{{p.nombre}}</td>
+<td>{{p.precio}}</td>
+</tr>
+
+</table>
