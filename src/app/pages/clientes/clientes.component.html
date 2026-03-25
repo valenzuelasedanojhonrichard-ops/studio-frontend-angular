@@ -1,1 +1,69 @@
-<p>clientes works!</p>
+<h2>Clientes</h2>
+
+<button (click)="mostrarFormulario()">Nuevo Cliente</button>
+
+<input type="text" [(ngModel)]="textoBuscar" placeholder="Buscar venta">
+<button (click)="buscar()">Buscar</button>
+<button (click)="listar()">Limpiar</button>
+
+
+<div *ngIf="formVisible">
+
+  <h3>{{ editando ? 'Editar Cliente' : 'Nuevo Cliente' }}</h3>
+
+  <input type="text" placeholder="Nombre" [(ngModel)]="cliente.nombre">
+  <input type="text" placeholder="Teléfono" [(ngModel)]="cliente.telefono">
+  <input type="email" placeholder="Email" [(ngModel)]="cliente.email">
+
+  <button (click)="guardar()">Guardar</button>
+
+</div>
+
+<table border="1">
+
+<tr>
+  <th>ID</th>
+  <th>Nombre</th>
+  <th>Teléfono</th>
+  <th>Email</th>
+  <th>Acciones</th>
+</tr>
+
+<tr *ngFor="let c of clientes">
+  <td>{{c.id}}</td>
+  <td>{{c.nombre}}</td>
+  <td>{{c.telefono}}</td>
+  <td>{{c.email}}</td>
+  <td>
+  <button (click)="editar(c)">Editar</button>
+  <button (click)="eliminar(c.id)">Eliminar</button>
+  <button (click)="verHistorial(c.id)">Historial</button>
+</td>
+
+</tr>
+
+</table>
+
+<div *ngIf="mostrarHistorial">
+
+  <h3>Historial del Cliente</h3>
+
+  <table border="1">
+
+    <tr>
+      <th>Servicio</th>
+      <th>Fecha</th>
+      <th>Estado</th>
+    </tr>
+
+    <tr *ngFor="let h of historial">
+      <td>{{h.servicio?.nombre}}</td>
+      <td>{{h.fechaHora}}</td>
+      <td>{{h.estado}}</td>
+    </tr>
+
+  </table>
+
+  <button (click)="mostrarHistorial=false">Cerrar</button>
+
+</div>

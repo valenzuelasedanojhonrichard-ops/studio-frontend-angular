@@ -9,4 +9,13 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'frontendestudio';
+
+  rol:string = '';
+
+  ngOnInit(){
+  this.rol = localStorage.getItem('rol') || '';
+}
+
+
+
 }

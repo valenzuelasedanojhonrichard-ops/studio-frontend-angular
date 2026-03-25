@@ -6,9 +6,9 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductosService {
+export class ClienteService {
 
-  private API = API_CONFIG.url + '/productos';
+  private API = API_CONFIG.url + '/clientes';
 
   constructor(private http: HttpClient) {}
 
@@ -16,11 +16,12 @@ export class ProductosService {
     return this.http.get<any[]>(this.API);
   }
 
-  crear(producto:any){
-    return this.http.post(this.API, producto);
+  crear(cliente:any){
+    return this.http.post(this.API, cliente);
   }
-  actualizar(id:number, producto:any){
-  return this.http.put(`${this.API}/${id}`, producto);
+
+  actualizar(id:number, cliente:any){
+    return this.http.put(`${this.API}/${id}`, cliente);
   }
 
   eliminar(id:number){
@@ -31,4 +32,6 @@ export class ProductosService {
   return this.http.get<any[]>(`${this.API}/buscar?texto=${texto}`);
   }
 
+
 }
+

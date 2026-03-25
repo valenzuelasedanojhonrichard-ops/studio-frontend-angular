@@ -1,1 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+@media print {
+
+  body * {
+    visibility: hidden;
+  }
+
+  #boleta, #boleta * {
+    visibility: visible;
+  }
+
+  #boleta {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  button {
+    display: none !important;
+  }
+
+}

@@ -1,0 +1,32 @@
+<h2>📊 Reporte de Ventas</h2>
+
+<hr>
+
+<label>Fecha Inicio:</label>
+<input type="date" [(ngModel)]="inicio">
+
+<label>Fecha Fin:</label>
+<input type="date" [(ngModel)]="fin">
+
+<br><br>
+
+<button (click)="buscar()">Buscar</button>
+<button (click)="descargarPDF()">Descargar PDF</button>
+
+<hr>
+
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Total</th>
+    <th>Fecha</th>
+
+  </tr>
+
+  <tr *ngFor="let v of ventas">
+  <td>{{v.id}}</td>
+  <td>{{v.total}}</td>
+  <td>{{v.fecha}}</td>
+</tr>
+
+</table>

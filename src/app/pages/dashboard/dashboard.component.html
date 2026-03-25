@@ -1,1 +1,72 @@
-<p>dashboard works!</p>
+<h2>📊 Dashboard</h2>
+
+<!-- ===================== -->
+<!-- 💰 VENTAS -->
+<!-- ===================== -->
+
+<h3>💰 Ventas</h3>
+
+<div style="display:flex; gap:20px">
+
+  <div style="border:1px solid black; padding:15px">
+    <h4>Hoy</h4>
+    <p>{{ventas.ventasHoy}}</p>
+  </div>
+
+  <div style="border:1px solid black; padding:15px">
+    <h4>Mes</h4>
+    <p>{{ventas.ventasMes}}</p>
+  </div>
+
+  <div style="border:1px solid black; padding:15px">
+    <h4>Total Mes</h4>
+    <p>S/ {{ventas.totalMes}}</p>
+  </div>
+
+</div>
+
+<!-- ===================== -->
+<!-- 📅 CITAS -->
+<!-- ===================== -->
+
+<h3>📅 Citas</h3>
+
+<div style="display:flex; gap:20px">
+
+  <div style="border:1px solid black; padding:15px">
+    <h4>Hoy</h4>
+    <p>{{citas.hoy}}</p>
+  </div>
+
+  <div style="border:1px solid black; padding:15px">
+    <h4>Semana</h4>
+    <p>{{citas.semana}}</p>
+  </div>
+
+  <div style="border:1px solid black; padding:15px">
+    <h4>Total Mes</h4>
+    <p>S/ {{citas.mes}}</p>
+  </div>
+
+</div>
+
+<br>
+
+<div style="display:flex; gap:20px">
+
+  <div style="border:1px solid black; padding:15px">
+    <h4>Reservadas</h4>
+    <p>{{citas.reservadas}}</p>
+  </div>
+
+  <div style="border:1px solid black; padding:15px">
+    <h4>Atendidas</h4>
+    <p>{{citas.atendidas}}</p>
+  </div>
+
+  <div style="border:1px solid black; padding:15px">
+    <h4>Canceladas</h4>
+    <p>{{citas.canceladas}}</p>
+  </div>
+
+</div>

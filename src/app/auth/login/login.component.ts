@@ -26,9 +26,7 @@ export class LoginComponent {
       .subscribe(res => {
 
         this.auth.saveToken(res.token);
-
-        // guardar rol
-        localStorage.setItem('role', res.role);
+        localStorage.setItem('rol', res.rol);
 
         this.router.navigate(['/dashboard']);
 

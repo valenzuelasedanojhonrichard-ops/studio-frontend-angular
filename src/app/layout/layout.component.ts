@@ -11,14 +11,14 @@ import { AuthService } from '../core/services/auth.service';
   styleUrl: './layout.component.css'
 })
 export class LayoutComponent {
-  role: string | null = '';
+  rol: string | null = '';
 
   constructor(private auth: AuthService){
-    this.role = this.auth.getRole();
+    this.rol = this.auth.getRol();
   }
 
 ngOnInit(){
-  this.role = localStorage.getItem('role') || '';
+  this.rol = localStorage.getItem('rol') || '';
 }
 
 

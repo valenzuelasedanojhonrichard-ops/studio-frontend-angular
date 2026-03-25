@@ -21,7 +21,7 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./pages/dashboard/dashboard.component')
             .then(m => m.DashboardComponent),
-            data: { role: 'ADMIN' }
+            data: { rol: 'ADMIN' }
       },
 
       {
@@ -29,7 +29,7 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./pages/usuarios/usuarios.component')
             .then(m => m.UsuariosComponent),
-            data: { role: 'ADMIN' }
+            data: { rol: 'ADMIN' }
       },
 
       {
@@ -37,7 +37,7 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./pages/productos/productos.component')
             .then(m => m.ProductosComponent),
-            data: { role: 'ADMIN,EMPLEADO' }
+            data: { rol: 'ADMIN' }
       },
 
       {
@@ -45,17 +45,51 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./pages/clientes/clientes.component')
             .then(m => m.ClientesComponent),
-            data: { role: 'ADMIN,EMPLEADO' }
+            data: { rol: 'ADMIN,EMPLEADO' }
       },
+
+       { path: 'servicios',
+         loadComponent: () =>
+          import('./pages/servicio/servicio.component')
+         .then(m => m.ServiciosComponent),
+         data: { rol: 'ADMIN,EMPLEADO' } },
+
+      { path: 'citas',
+         loadComponent: () =>
+          import('./pages/citas/citas.component')
+         .then(m => m.CitasComponent),
+        data: { rol: 'ADMIN,EMPLEADO' } },
+
 
       {
         path: 'ventas',
         loadComponent: () =>
           import('./pages/ventas/ventas.component')
             .then(m => m.VentasComponent),
-            data: { role: 'ADMIN,EMPLEADO' }
-      }
+            data: { rol: 'ADMIN,EMPLEADO' }
+      },
 
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+
+      { path: 'dashboard',loadComponent: () =>
+          import('./pages/dashboard/dashboard.component')
+            .then(m => m.DashboardComponent),
+            data: { rol: 'ADMIN' }
+      },
+
+      {
+        path: 'login',
+        component: LoginComponent
+      },
+
+
+      {
+        path: 'reportes',
+        loadComponent: () =>
+          import('./pages/reportes/reportes.component')
+            .then(m => m.ReportesComponent),
+            data: { role: 'ADMIN' }
+        }
     ]
   }
 

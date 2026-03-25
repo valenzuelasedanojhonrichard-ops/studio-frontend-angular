@@ -12,10 +12,10 @@ export const authGuard: CanActivateFn = (route, state) => {
     return false;
   }
 
-  const role = authService.getRole();
-  const roleRoute = route.data['role'];
+  const rol = authService.getRol();
+  const roleRoute = route.data['rol'];
 
-  if(roleRoute && !roleRoute.includes(role)){
+  if(roleRoute && !roleRoute.includes(rol)){
     router.navigate(['/dashboard']);
     return false;
   }

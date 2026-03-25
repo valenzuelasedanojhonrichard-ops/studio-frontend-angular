@@ -2,15 +2,30 @@
 
 <button (click)="mostrarFormulario()">Nuevo Producto</button>
 
+<input type="text" [(ngModel)]="textoBuscar" placeholder="Buscar venta">
+<button (click)="buscar()">Buscar</button>
+<button (click)="listar()">Limpiar</button>
+
+
 <div *ngIf="formVisible">
 
-  <h3>Nuevo Producto</h3>
+  <h3>{{ editando ? 'Editar Producto' : 'Nuevo Producto' }}</h3>
 
-  <input type="text" placeholder="Nombre" [(ngModel)]="productos.nombre">
+  <input type="text" placeholder="Nombre" [(ngModel)]="producto.nombre">
 
-  <input type="number" placeholder="Precio" [(ngModel)]="productos.precio">
+  <input type="number" placeholder="Precio" [(ngModel)]="producto.precio">
 
-  <button (click)="guardar()">Guardar</button>
+  <input type="text" placeholder="Marca" [(ngModel)]="producto.marca">
+
+  <input type="number" placeholder="Stock" [(ngModel)]="producto.stock">
+
+  <input type="number" placeholder="Stock mínimo" [(ngModel)]="producto.stockMin">
+
+  <br><br>
+
+  <button (click)="guardar()">
+    {{ editando ? 'Actualizar' : 'Guardar' }}
+  </button>
 
 </div>
 
@@ -19,13 +34,26 @@
 <tr>
 <th>ID</th>
 <th>Nombre</th>
+<th>Marca</th>
 <th>Precio</th>
+<th>Stock</th>
+<th>Acciones</th>
 </tr>
 
 <tr *ngFor="let p of productos">
+
 <td>{{p.id}}</td>
 <td>{{p.nombre}}</td>
+<td>{{p.marca}}</td>
 <td>{{p.precio}}</td>
+<td>{{p.stock}}</td>
+
+<td>
+<button (click)="editar(p)">Editar</button>
+<button (click)="eliminar(p.id)">Eliminar</button>
+</td>
+
 </tr>
 
 </table>
+

@@ -1,1 +1,140 @@
-<p>ventas works!</p>
+<h2>Ventas</h2>
+
+<!-- BOTONES -->
+<button (click)="vista='crear'">Nueva Venta</button>
+<button (click)="vista='lista'">Ver Ventas</button>
+
+<hr>
+
+
+<!-- ========================= -->
+<!-- CREAR VENTA -->
+<!-- ========================= -->
+<div *ngIf="vista==='crear'">
+
+  <h3>Nueva Venta</h3>
+
+  <!-- PRODUCTO -->
+  <select [(ngModel)]="productoSeleccionado">
+    <option [ngValue]="null">Seleccione producto</option>
+    <option *ngFor="let p of productos" [ngValue]="p">
+      {{p.nombre}} - {{p.precio}}
+    </option>
+  </select>
+  <!-- CLIENTE -->
+  <select [(ngModel)]="clienteSeleccionado">
+    <option [ngValue]="null">Seleccione cliente</option>
+    <option *ngFor="let c of clientes" [ngValue]="c">
+      {{c.nombre}}
+    </option>
+  </select>
+
+
+  <!-- CANTIDAD -->
+  <input type="number" [(ngModel)]="cantidad" placeholder="Cantidad">
+
+  <button (click)="agregar()">Agregar</button>
+
+  <hr>
+
+  <!-- CARRITO -->
+  <table border="1">
+    <tr>
+      <th>Producto</th>
+      <th>Precio</th>
+      <th>Cantidad</th>
+      <th>Subtotal</th>
+    </tr>
+
+    <tr *ngFor="let c of carrito">
+      <td>{{c.nombre}}</td>
+      <td>{{c.precio}}</td>
+      <td>{{c.cantidad}}</td>
+      <td>{{c.subtotal}}</td>
+    </tr>
+  </table>
+
+  <h3>Total: {{total}}</h3>
+
+  <button (click)="guardarVenta()">Guardar Venta</button>
+
+</div>
+
+<!-- ========================= -->
+<!-- LISTA DE VENTAS -->
+<!-- ========================= -->
+<div *ngIf="vista==='lista'">
+
+  <h3>Ventas Realizadas</h3>
+
+    <input type="text" [(ngModel)]="textoBuscar" placeholder="Buscar venta">
+    <button (click)="buscar()">Buscar</button>
+    <button (click)="listarVentas()">Limpiar</button>
+
+  <table border="1">
+    <tr>
+  <th>ID</th>
+  <th>Cliente</th>
+  <th>Fecha</th>
+  <th>Total</th>
+  <th>Estado</th>
+  <th>Acciones</th>
+</tr>
+
+<tr *ngFor="let v of ventas">
+  <td>{{v.id}}</td>
+  <td>{{v.cliente}}</td>
+  <td>{{v.fecha | date:'short'}}</td>
+  <td>{{v.total}}</td>
+  <td>{{v.estado}}</td>
+  <td>
+    <button (click)="verDetalle(v)">Ver</button>
+  </td>
+</tr>
+
+  </table>
+
+</div>
+
+<!-- ========================= -->
+<!-- BOLETA -->
+<!-- ========================= -->
+<div *ngIf="ventaSeleccionada" id="boleta" style="margin-top:20px; border:1px solid black; padding:15px; width:300px">
+
+  <p style="text-align:center">Sistema ARIS</p>
+  <h3 style="text-align:center">🧾 Boleta de Venta</h3>
+
+  <p><b>ID:</b> {{ventaSeleccionada.id}}</p>
+  <p><b>Fecha:</b> {{ventaSeleccionada.fecha}}</p>
+  <p><b>Estado:</b> {{ventaSeleccionada.estado}}</p>
+
+  <hr>
+
+  <table border="1" width="100%">
+    <tr>
+      <th>Producto</th>
+      <th>Cant</th>
+      <th>Precio</th>
+      <th>Sub</th>
+    </tr>
+
+    <tr *ngFor="let d of ventaSeleccionada.detalles">
+      <td>{{d.producto}}</td>
+      <td>{{d.cantidad}}</td>
+      <td>{{d.precio}}</td>
+      <td>{{d.subtotal}}</td>
+    </tr>
+  </table>
+
+  <hr>
+
+  <h3 style="text-align:right">Total: {{ventaSeleccionada.total}}</h3>
+
+  <div style="text-align:center" class="no-print">
+    <button (click)="ventaSeleccionada=null">Cerrar</button>
+    <button (click)="imprimir()">Imprimir</button>
+  </div>
+
+  <p style="text-align:center">Gracias por su compra</p>
+
+</div>

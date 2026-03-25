@@ -10,12 +10,20 @@ import { CommonModule } from '@angular/common';
   styleUrl: './productos.component.css'
 })
 export class ProductosComponent implements OnInit {
-    productos:any = {
-    nombre:'',
-    precio:0
-    };
 
-formVisible = false;
+  productos:any[]=[];
+
+  producto:any = {
+    id:null,
+    nombre:'',
+    precio:0,
+    marca:'',
+    stock:0,
+    stockMin:0
+  };
+
+  formVisible = false;
+  editando = false;
 
   constructor(private productoService:ProductosService){}
 
@@ -30,24 +38,64 @@ formVisible = false;
   }
 
   mostrarFormulario(){
-  this.formVisible = true;
+    this.formVisible = true;
+  }
+
+  guardar(){
+
+    if(this.editando){
+
+      this.productoService.actualizar(this.producto.id, this.producto)
+      .subscribe(()=>{
+        this.listar();
+        this.formVisible = false;
+        this.editando = false;
+      });
+
+    }else{
+
+      this.productoService.crear(this.producto)
+      .subscribe(()=>{
+
+        this.listar();
+        this.formVisible = false;
+
+        this.producto = {
+          id:null,
+          nombre:'',
+          precio:0,
+          marca:'',
+          stock:0,
+          stockMin:0
+        };
+
+      });
+    }
+  }
+
+  editar(p:any){
+
+    this.producto = {...p};
+
+    this.formVisible = true;
+    this.editando = true;
+
+  }
+
+  eliminar(id:number){
+    this.productoService.eliminar(id)
+    .subscribe(()=>{
+      this.listar();
+    });
+  }
+
+  textoBuscar:string = '';
+
+  buscar(){
+    this.productoService.buscar(this.textoBuscar)
+      .subscribe(data => this.producto = data);
+  }
+
+
 }
 
-guardar(){
-
-  this.productoService.crear(this.productos)
-  .subscribe(()=>{
-
-    this.listar(); // refrescar lista
-    this.formVisible = false;
-
-    this.productos = {
-      nombre:'',
-      precio:0
-    };
-
-  });
-
-}
-
-}
