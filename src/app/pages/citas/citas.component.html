@@ -1,44 +1,63 @@
-<h2>Citas</h2>
+<h2 class="titulo">📅 Gestión de Citas</h2>
 
-<button (click)="mostrarFormulario()">Nueva Cita</button>
+<div class="toolbar">
 
-<input type="text" [(ngModel)]="textoBuscar" placeholder="Buscar venta">
-<button (click)="buscar()">Buscar</button>
-<button (click)="listar()">Limpiar</button>
+  <button class="btn verde" (click)="mostrarFormulario()">
+    ➕ Nueva Cita
+  </button>
 
+  <input
+    type="text"
+    [(ngModel)]="textoBuscar"
+    placeholder="Buscar cita..."
+  >
 
-<div *ngIf="formVisible">
-
-  <h3>Nueva Cita</h3>
-
-  <!-- CLIENTE -->
-  <select [(ngModel)]="cita.cliente.id">
-    <option [ngValue]="null">Seleccione cliente</option>
-    <option *ngFor="let c of clientes" [value]="c.id">
-      {{c.nombre}}
-    </option>
-  </select>
-
-  <!-- SERVICIO -->
-  <select [(ngModel)]="cita.servicio.id" (change)="seleccionarServicio()">
-    <option [ngValue]="null">Seleccione servicio</option>
-    <option *ngFor="let s of servicios" [value]="s.id">
-      {{s.nombre}} - {{s.precio}}
-    </option>
-  </select>
-
-  <!-- FECHA -->
-  <input type="datetime-local" [(ngModel)]="cita.fechaHora">
-
-  <!-- DURACION -->
-  <input type="number" [(ngModel)]="cita.duracionMinutos" readonly>
-
-  <button (click)="guardar()">Guardar</button>
+  <button class="btn azul" (click)="buscar()">Buscar</button>
+  <button class="btn gris" (click)="listar()">Limpiar</button>
 
 </div>
 
-<table border="1">
+<!-- FORMULARIO -->
+<div *ngIf="formVisible" class="formulario">
 
+  <h3>📌 Nueva Cita</h3>
+
+  <div class="grid-form">
+
+    <!-- CLIENTE -->
+    <select [(ngModel)]="cita.cliente.id" name="cliente">
+      <option [ngValue]="null">Seleccione cliente</option>
+      <option *ngFor="let c of clientes" [value]="c.id">
+        {{c.nombre}}
+      </option>
+    </select>
+
+    <!-- SERVICIO -->
+    <select [(ngModel)]="cita.servicio.id" (change)="seleccionarServicio()" name="servicio">
+      <option [ngValue]="null">Seleccione servicio</option>
+      <option *ngFor="let s of servicios" [value]="s.id">
+        {{s.nombre}} - S/ {{s.precio}}
+      </option>
+    </select>
+
+    <!-- FECHA -->
+    <input type="datetime-local" [(ngModel)]="cita.fechaHora">
+
+    <!-- DURACIÓN -->
+    <input type="number" [(ngModel)]="cita.duracionMinutos" readonly>
+
+  </div>
+
+  <button class="btn guardar" (click)="guardar()">Guardar</button>
+
+</div>
+
+<!-- TABLA -->
+<div class="tabla-container">
+
+<table>
+
+<thead>
 <tr>
   <th>ID</th>
   <th>Cliente</th>
@@ -47,17 +66,34 @@
   <th>Estado</th>
   <th>Acciones</th>
 </tr>
+</thead>
 
+<tbody>
 <tr *ngFor="let c of citas">
+
   <td>{{c.id}}</td>
   <td>{{c.cliente?.nombre}}</td>
   <td>{{c.servicio?.nombre}}</td>
-  <td>{{c.fechaHora}}</td>
-  <td>{{c.estado}}</td>
+  <td>{{c.fechaHora | date:'short'}}</td>
+
   <td>
-    <button (click)="atender(c.id)">Atender</button>
-    <button (click)="cancelar(c.id)">Cancelar</button>
+    <span [ngClass]="{
+      'badge verde': c.estado === 'ATENDIDA',
+      'badge naranja': c.estado === 'RESERVADA',
+      'badge rojo': c.estado === 'CANCELADA'
+    }">
+      {{c.estado}}
+    </span>
   </td>
+
+  <td>
+    <button class="btn editar" (click)="atender(c.id)">✔️</button>
+    <button class="btn eliminar" (click)="cancelar(c.id)">❌</button>
+  </td>
+
 </tr>
+</tbody>
 
 </table>
+
+</div>

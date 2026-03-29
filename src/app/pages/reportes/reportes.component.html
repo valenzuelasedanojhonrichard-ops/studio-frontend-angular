@@ -1,32 +1,68 @@
-<h2>📊 Reporte de Ventas</h2>
+<h2 class="titulo">📊 Reporte de Ventas</h2>
 
-<hr>
+<div class="toolbar">
 
-<label>Fecha Inicio:</label>
-<input type="date" [(ngModel)]="inicio">
+  <div>
+    <label>Inicio:</label>
+    <input type="date" [(ngModel)]="inicio">
+  </div>
 
-<label>Fecha Fin:</label>
-<input type="date" [(ngModel)]="fin">
+  <div>
+    <label>Fin:</label>
+    <input type="date" [(ngModel)]="fin">
+  </div>
 
-<br><br>
+  <button class="btn azul" (click)="buscar()">🔍 Buscar</button>
+  <button class="btn verde" (click)="descargarPDF()">📄 PDF</button>
 
-<button (click)="buscar()">Buscar</button>
-<button (click)="descargarPDF()">Descargar PDF</button>
+</div>
 
-<hr>
+<!-- RESUMEN -->
+<div class="grid" style="margin-top:20px">
 
-<table border="1">
-  <tr>
-    <th>ID</th>
-    <th>Total</th>
-    <th>Fecha</th>
+  <div class="card azul">
+    <h4>Total Ventas</h4>
+    <p>{{ventas.length}}</p>
+  </div>
 
-  </tr>
+  <div class="card verde">
+    <h4>Monto Total</h4>
+    <p>{{ getTotal() }}</p>
 
-  <tr *ngFor="let v of ventas">
-  <td>{{v.id}}</td>
-  <td>{{v.total}}</td>
-  <td>{{v.fecha}}</td>
+  </div>
+
+</div>
+
+<!-- TABLA -->
+<div class="tabla-container" style="margin-top:20px">
+
+<table>
+
+<thead>
+<tr>
+  <th>ID</th>
+  <th>Total</th>
+  <th>Fecha</th>
 </tr>
+</thead>
+
+<tbody>
+<tr *ngFor="let v of ventas">
+
+  <td>{{v.id}}</td>
+
+  <td>
+    <span class="badge verde">
+      S/ {{v.total}}
+    </span>
+  </td>
+
+  <td>{{v.fecha | date:'dd/MM/yyyy HH:mm'}}</td>
+
+</tr>
+</tbody>
 
 </table>
+
+</div>
+

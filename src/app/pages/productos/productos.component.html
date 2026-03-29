@@ -1,36 +1,49 @@
-<h2>Productos</h2>
+<h2 class="titulo">📦 Gestión de Productos</h2>
 
-<button (click)="mostrarFormulario()">Nuevo Producto</button>
+<div class="toolbar">
 
-<input type="text" [(ngModel)]="textoBuscar" placeholder="Buscar venta">
-<button (click)="buscar()">Buscar</button>
-<button (click)="listar()">Limpiar</button>
+  <button class="btn verde" (click)="mostrarFormulario()">
+    ➕ Nuevo Producto
+  </button>
 
+  <input
+    type="text"
+    [(ngModel)]="textoBuscar"
+    placeholder="Buscar producto..."
+  >
 
-<div *ngIf="formVisible">
+  <button class="btn azul" (click)="buscar()">Buscar</button>
+  <button class="btn gris" (click)="listar()">Limpiar</button>
 
-  <h3>{{ editando ? 'Editar Producto' : 'Nuevo Producto' }}</h3>
+</div>
 
-  <input type="text" placeholder="Nombre" [(ngModel)]="producto.nombre">
+<!-- FORMULARIO -->
+<div *ngIf="formVisible" class="formulario">
 
-  <input type="number" placeholder="Precio" [(ngModel)]="producto.precio">
+  <h3>{{ editando ? '✏️ Editar Producto' : '➕ Nuevo Producto' }}</h3>
 
-  <input type="text" placeholder="Marca" [(ngModel)]="producto.marca">
+  <div class="grid-form">
 
-  <input type="number" placeholder="Stock" [(ngModel)]="producto.stock">
+    <input type="text" placeholder="Nombre" [(ngModel)]="producto.nombre">
+    <input type="number" placeholder="Precio" [(ngModel)]="producto.precio">
+    <input type="text" placeholder="Marca" [(ngModel)]="producto.marca">
+    <input type="number" placeholder="Stock" [(ngModel)]="producto.stock">
+    <input type="number" placeholder="Stock mínimo" [(ngModel)]="producto.stockMin">
 
-  <input type="number" placeholder="Stock mínimo" [(ngModel)]="producto.stockMin">
+  </div>
 
-  <br><br>
-
-  <button (click)="guardar()">
+  <button class="btn guardar" (click)="guardar()">
     {{ editando ? 'Actualizar' : 'Guardar' }}
   </button>
 
 </div>
 
-<table border="1">
+<!-- TABLA -->
+<div class="tabla-container">
 
+<table>
+
+<thead>
 <tr>
 <th>ID</th>
 <th>Nombre</th>
@@ -39,21 +52,34 @@
 <th>Stock</th>
 <th>Acciones</th>
 </tr>
+</thead>
 
+<tbody>
 <tr *ngFor="let p of productos">
 
 <td>{{p.id}}</td>
 <td>{{p.nombre}}</td>
 <td>{{p.marca}}</td>
-<td>{{p.precio}}</td>
-<td>{{p.stock}}</td>
+<td>S/ {{p.precio}}</td>
 
 <td>
-<button (click)="editar(p)">Editar</button>
-<button (click)="eliminar(p.id)">Eliminar</button>
+  <span [ngClass]="{
+    'badge verde': p.stock > 10,
+    'badge naranja': p.stock <= 10 && p.stock > 0,
+    'badge rojo': p.stock == 0
+  }">
+    {{p.stock}}
+  </span>
+</td>
+
+<td>
+  <button class="btn editar" (click)="editar(p)">✏️</button>
+  <button class="btn eliminar" (click)="eliminar(p.id)">🗑️</button>
 </td>
 
 </tr>
+</tbody>
 
 </table>
 
+</div>

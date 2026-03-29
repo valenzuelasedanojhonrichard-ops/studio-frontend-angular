@@ -75,7 +75,8 @@ export class ProductosComponent implements OnInit {
 
   editar(p:any){
 
-    this.producto = {...p};
+    this.producto = {...p,
+    marca: p.marca || ''};
 
     this.formVisible = true;
     this.editando = true;
@@ -93,7 +94,8 @@ export class ProductosComponent implements OnInit {
 
   buscar(){
     this.productoService.buscar(this.textoBuscar)
-      .subscribe(data => this.producto = data);
+      .subscribe(data =>
+      this.productos = data);
   }
 
 

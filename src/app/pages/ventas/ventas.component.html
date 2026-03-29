@@ -1,62 +1,71 @@
-<h2>Ventas</h2>
+<h2 class="titulo">Ventas</h2>
 
 <!-- BOTONES -->
-<button (click)="vista='crear'">Nueva Venta</button>
-<button (click)="vista='lista'">Ver Ventas</button>
+<div class="toolbar">
+  <button class="btn verde" (click)="vista='crear'">Nueva Venta</button>
+  <button class="btn azul" (click)="vista='lista'">Ver Ventas</button>
+</div>
 
 <hr>
-
 
 <!-- ========================= -->
 <!-- CREAR VENTA -->
 <!-- ========================= -->
-<div *ngIf="vista==='crear'">
+<div *ngIf="vista==='crear'" class="formulario">
 
   <h3>Nueva Venta</h3>
 
-  <!-- PRODUCTO -->
-  <select [(ngModel)]="productoSeleccionado">
-    <option [ngValue]="null">Seleccione producto</option>
-    <option *ngFor="let p of productos" [ngValue]="p">
-      {{p.nombre}} - {{p.precio}}
-    </option>
-  </select>
-  <!-- CLIENTE -->
-  <select [(ngModel)]="clienteSeleccionado">
-    <option [ngValue]="null">Seleccione cliente</option>
-    <option *ngFor="let c of clientes" [ngValue]="c">
-      {{c.nombre}}
-    </option>
-  </select>
+  <div class="grid-form">
 
+    <!-- PRODUCTO -->
+    <select [(ngModel)]="productoSeleccionado">
+      <option [ngValue]="null">Seleccione producto</option>
+      <option *ngFor="let p of productos" [ngValue]="p">
+        {{p.nombre}} - {{p.precio}}
+      </option>
+    </select>
 
-  <!-- CANTIDAD -->
-  <input type="number" [(ngModel)]="cantidad" placeholder="Cantidad">
+    <!-- CLIENTE -->
+    <select [(ngModel)]="clienteSeleccionado">
+      <option [ngValue]="null">Seleccione cliente</option>
+      <option *ngFor="let c of clientes" [ngValue]="c">
+        {{c.nombre}}
+      </option>
+    </select>
 
-  <button (click)="agregar()">Agregar</button>
+    <!-- CANTIDAD -->
+    <input type="number" [(ngModel)]="cantidad" placeholder="Cantidad">
+
+  </div>
+
+  <button class="btn guardar" (click)="agregar()">Agregar</button>
 
   <hr>
 
   <!-- CARRITO -->
-  <table border="1">
-    <tr>
-      <th>Producto</th>
-      <th>Precio</th>
-      <th>Cantidad</th>
-      <th>Subtotal</th>
-    </tr>
+  <div class="tabla-container">
+    <table>
 
-    <tr *ngFor="let c of carrito">
-      <td>{{c.nombre}}</td>
-      <td>{{c.precio}}</td>
-      <td>{{c.cantidad}}</td>
-      <td>{{c.subtotal}}</td>
-    </tr>
-  </table>
+      <tr>
+        <th>Producto</th>
+        <th>Precio</th>
+        <th>Cantidad</th>
+        <th>Subtotal</th>
+      </tr>
+
+      <tr *ngFor="let c of carrito">
+        <td>{{c.nombre}}</td>
+        <td>{{c.precio}}</td>
+        <td>{{c.cantidad}}</td>
+        <td>{{c.subtotal}}</td>
+      </tr>
+
+    </table>
+  </div>
 
   <h3>Total: {{total}}</h3>
 
-  <button (click)="guardarVenta()">Guardar Venta</button>
+  <button class="btn verde" (click)="guardarVenta()">Guardar Venta</button>
 
 </div>
 
@@ -67,39 +76,49 @@
 
   <h3>Ventas Realizadas</h3>
 
+  <div class="toolbar">
     <input type="text" [(ngModel)]="textoBuscar" placeholder="Buscar venta">
-    <button (click)="buscar()">Buscar</button>
-    <button (click)="listarVentas()">Limpiar</button>
+    <button class="btn azul" (click)="buscar()">Buscar</button>
+    <button class="btn gris" (click)="listarVentas()">Limpiar</button>
+  </div>
 
-  <table border="1">
-    <tr>
-  <th>ID</th>
-  <th>Cliente</th>
-  <th>Fecha</th>
-  <th>Total</th>
-  <th>Estado</th>
-  <th>Acciones</th>
-</tr>
+  <div class="tabla-container">
+    <table>
 
-<tr *ngFor="let v of ventas">
-  <td>{{v.id}}</td>
-  <td>{{v.cliente}}</td>
-  <td>{{v.fecha | date:'short'}}</td>
-  <td>{{v.total}}</td>
-  <td>{{v.estado}}</td>
-  <td>
-    <button (click)="verDetalle(v)">Ver</button>
-  </td>
-</tr>
+      <tr>
+        <th>ID</th>
+        <th>Cliente</th>
+        <th>Fecha</th>
+        <th>Total</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
 
-  </table>
+      <tr *ngFor="let v of ventas">
+        <td>{{v.id}}</td>
+        <td>{{v.cliente}}</td>
+        <td>{{v.fecha | date:'short'}}</td>
+        <td>{{v.total}}</td>
+        <td>{{v.estado}}</td>
+        <td>
+          <button class="btn editar" (click)="verDetalle(v)">detalle</button>
+        </td>
+      </tr>
+
+    </table>
+  </div>
 
 </div>
 
 <!-- ========================= -->
 <!-- BOLETA -->
 <!-- ========================= -->
-<div *ngIf="ventaSeleccionada" id="boleta" style="margin-top:20px; border:1px solid black; padding:15px; width:300px">
+<div
+  *ngIf="ventaSeleccionada"
+  id="boleta"
+  class="formulario"
+  style="margin-top:20px; max-width:400px; margin:auto;"
+>
 
   <p style="text-align:center">Sistema ARIS</p>
   <h3 style="text-align:center">🧾 Boleta de Venta</h3>
@@ -110,29 +129,33 @@
 
   <hr>
 
-  <table border="1" width="100%">
-    <tr>
-      <th>Producto</th>
-      <th>Cant</th>
-      <th>Precio</th>
-      <th>Sub</th>
-    </tr>
+  <div class="tabla-container">
+    <table>
 
-    <tr *ngFor="let d of ventaSeleccionada.detalles">
-      <td>{{d.producto}}</td>
-      <td>{{d.cantidad}}</td>
-      <td>{{d.precio}}</td>
-      <td>{{d.subtotal}}</td>
-    </tr>
-  </table>
+      <tr>
+        <th>Producto</th>
+        <th>Cant</th>
+        <th>Precio</th>
+        <th>Sub</th>
+      </tr>
+
+      <tr *ngFor="let d of ventaSeleccionada.detalles">
+        <td>{{d.producto}}</td>
+        <td>{{d.cantidad}}</td>
+        <td>{{d.precio}}</td>
+        <td>{{d.subtotal}}</td>
+      </tr>
+
+    </table>
+  </div>
 
   <hr>
 
   <h3 style="text-align:right">Total: {{ventaSeleccionada.total}}</h3>
 
   <div style="text-align:center" class="no-print">
-    <button (click)="ventaSeleccionada=null">Cerrar</button>
-    <button (click)="imprimir()">Imprimir</button>
+    <button class="btn gris" (click)="ventaSeleccionada=null">Cerrar</button>
+    <button class="btn verde" (click)="imprimir()">Imprimir</button>
   </div>
 
   <p style="text-align:center">Gracias por su compra</p>

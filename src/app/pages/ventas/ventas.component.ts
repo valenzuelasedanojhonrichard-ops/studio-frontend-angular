@@ -108,6 +108,8 @@ export class VentasComponent {
     alert("Seleccione cliente");
     return;
   }
+
+
   this.ventaService.crear(venta)
   .subscribe(()=>{
 

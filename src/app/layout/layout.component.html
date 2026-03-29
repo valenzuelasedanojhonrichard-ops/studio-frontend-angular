@@ -1,66 +1,50 @@
-<div style="display:flex;height:100vh">
+<div class="layout">
 
   <!-- SIDEBAR -->
-  <div style="width:220px;background:#334155;color:white;padding:20px">
+  <aside class="sidebar">
 
-    <h3>Sistema ARIS</h3>
+    <!-- LOGO -->
+    <div class="logo">
+      <img src="assets/logo.png" alt="logo">
+      <h2>ARIS</h2>
+    </div>
 
-    <ul style="list-style:none;padding:0">
+    <nav>
+      <a routerLink="/dashboard">Dashboard</a>
+      <a routerLink="/usuarios" *ngIf="rol==='ADMIN'">Usuarios</a>
+      <a routerLink="/productos">Productos</a>
+      <a routerLink="/servicios">Servicios</a>
+      <a routerLink="/clientes">Clientes</a>
+      <a routerLink="/citas">Citas</a>
+      <a routerLink="/ventas">Ventas</a>
+      <a routerLink="/reportes">Reportes</a>
+    </nav>
 
-      <li style="margin-bottom:10px" *ngIf="rol === 'ADMIN'">
-        <a routerLink="/dashboard" style="color:white;text-decoration:none">
-          Dashboard
-        </a>
-      </li>
+    <!-- REDES -->
+    <div class="social">
+      <a href="#">Instagram</a>
+      <a href="#">TikTok</a>
+    </div>
 
-      <li style="margin-bottom:10px" *ngIf="rol === 'ADMIN'">
-        <a routerLink="/usuarios" style="color:white;text-decoration:none">
-          Usuarios
-        </a>
-      </li>
-
-      <li style="margin-bottom:10px" *ngIf="rol === 'ADMIN'">
-        <a routerLink="/productos" style="color:white;text-decoration:none">
-          Productos
-        </a>
-      </li>
-
-      <li style="margin-bottom:10px">
-        <a routerLink="/clientes" style="color:white;text-decoration:none">
-          Clientes
-        </a>
-      </li>
-
-      <li style="margin-bottom:10px" *ngIf="rol === 'ADMIN'">
-        <a routerLink="/servicios" style="color:white;text-decoration:none">
-          Servicios
-        </a>
-      </li>
-
-      <li style="margin-bottom:10px">
-        <a routerLink="/citas" style="color:white;text-decoration:none">
-          Citas
-        </a>
-      </li>
-
-      <li style="margin-bottom:10px">
-        <a routerLink="/ventas" style="color:white;text-decoration:none">
-          Ventas
-        </a>
-      </li>
-
-      <li *ngIf="rol === 'ADMIN'">
-        <a routerLink="/reportes">Reportes</a>
-      </li>
-
-
-    </ul>
-
-  </div>
+  </aside>
 
   <!-- CONTENIDO -->
-  <div style="flex:1;padding:20px">
-    <router-outlet></router-outlet>
+  <div class="main">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <span>Bienvenido</span>
+      <div>
+        <strong>{{rol}}</strong>
+        <button (click)="logout()">Salir</button>
+      </div>
+    </header>
+
+    <!-- CONTENIDO -->
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+
   </div>
 
 </div>

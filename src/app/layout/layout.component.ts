@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet, RouterLink } from '@angular/router';
+import { RouterOutlet, RouterLink , Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../core/services/auth.service';
 
@@ -13,13 +13,25 @@ import { AuthService } from '../core/services/auth.service';
 export class LayoutComponent {
   rol: string | null = '';
 
-  constructor(private auth: AuthService){
+  constructor(
+    private auth: AuthService,
+    private router: Router)
+    {
     this.rol = this.auth.getRol();
-  }
+    }
 
 ngOnInit(){
   this.rol = localStorage.getItem('rol') || '';
 }
+
+logout(){
+    // 🔥 limpiar sesión
+    localStorage.removeItem('token');
+    localStorage.removeItem('rol');
+
+    // 🔥 redirigir al login
+    this.router.navigate(['/']);
+  }
 
 
 }

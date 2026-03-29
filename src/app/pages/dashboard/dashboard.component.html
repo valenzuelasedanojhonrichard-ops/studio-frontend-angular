@@ -1,26 +1,25 @@
-<h2>📊 Dashboard</h2>
+<h2 style="margin-bottom:20px">📊 Panel de control</h2>
 
 <!-- ===================== -->
 <!-- 💰 VENTAS -->
 <!-- ===================== -->
-
 <h3>💰 Ventas</h3>
 
-<div style="display:flex; gap:20px">
+<div class="grid">
 
-  <div style="border:1px solid black; padding:15px">
+  <div class="card verde">
     <h4>Hoy</h4>
-    <p>{{ventas.ventasHoy}}</p>
+    <p>{{ventas.ventasHoy || 0}}</p>
   </div>
 
-  <div style="border:1px solid black; padding:15px">
+  <div class="card naranja">
     <h4>Mes</h4>
-    <p>{{ventas.ventasMes}}</p>
+    <p>{{ventas.ventasMes || 0}}</p>
   </div>
 
-  <div style="border:1px solid black; padding:15px">
+  <div class="card azul">
     <h4>Total Mes</h4>
-    <p>S/ {{ventas.totalMes}}</p>
+    <p>S/ {{ventas.totalMes || 0}}</p>
   </div>
 
 </div>
@@ -28,45 +27,51 @@
 <!-- ===================== -->
 <!-- 📅 CITAS -->
 <!-- ===================== -->
+<h3 style="margin-top:30px">📅 Citas</h3>
 
-<h3>📅 Citas</h3>
+<div class="grid">
 
-<div style="display:flex; gap:20px">
+  <div class="card">
+    <canvas id="graficoVentas"></canvas>
+  </div>
 
-  <div style="border:1px solid black; padding:15px">
+  <div class="card verde">
     <h4>Hoy</h4>
-    <p>{{citas.hoy}}</p>
+    <p>{{citas.hoy || 0}}</p>
   </div>
 
-  <div style="border:1px solid black; padding:15px">
+  <div class="card naranja">
     <h4>Semana</h4>
-    <p>{{citas.semana}}</p>
+    <p>{{citas.semana || 0}}</p>
   </div>
 
-  <div style="border:1px solid black; padding:15px">
+  <div class="card azul">
     <h4>Total Mes</h4>
-    <p>S/ {{citas.mes}}</p>
+    <p>{{citas.mes || 0}}</p>
   </div>
 
 </div>
 
-<br>
+<div class="grid" style="margin-top:15px">
 
-<div style="display:flex; gap:20px">
+   <div class="card">
+    <canvas id="graficoCitas"></canvas>
+  </div>
 
-  <div style="border:1px solid black; padding:15px">
+  <div class="card">
     <h4>Reservadas</h4>
-    <p>{{citas.reservadas}}</p>
+    <p>{{citas.reservadas || 0}}</p>
   </div>
 
-  <div style="border:1px solid black; padding:15px">
+  <div class="card">
     <h4>Atendidas</h4>
-    <p>{{citas.atendidas}}</p>
+    <p>{{citas.atendidas || 0}}</p>
   </div>
 
-  <div style="border:1px solid black; padding:15px">
+  <div class="card">
     <h4>Canceladas</h4>
-    <p>{{citas.canceladas}}</p>
+    <p>{{citas.canceladas || 0}}</p>
   </div>
 
 </div>
+

@@ -97,7 +97,7 @@ export class CitasComponent implements OnInit {
 
   buscar(){
     this.citaService.buscar(this.textoBuscar)
-      .subscribe(data => this.cita = data);
+      .subscribe(data => this.citas = data);
   }
 
 }

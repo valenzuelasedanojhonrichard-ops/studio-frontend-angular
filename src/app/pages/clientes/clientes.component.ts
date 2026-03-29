@@ -84,9 +84,9 @@ export class ClientesComponent implements OnInit {
   textoBuscar:string = '';
 
   buscar(){
-    this.clienteService.buscar(this.textoBuscar)
-      .subscribe(data => this.cliente = data);
-  }
+  this.clienteService.buscar(this.textoBuscar)
+    .subscribe(data => this.clientes = data);
+}
 
 
   verHistorial(id:number){

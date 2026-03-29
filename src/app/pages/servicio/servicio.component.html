@@ -1,20 +1,26 @@
-<h2>Servicios</h2>
+<h2 class="titulo">Servicios</h2>
 
-<button (click)="mostrarFormulario()">Nuevo Servicio</button>
+<div class="toolbar">
+  <button class="btn verde" (click)="mostrarFormulario()">Nuevo Servicio</button>
+</div>
 
-<div *ngIf="formVisible">
+<div *ngIf="formVisible" class="formulario">
 
   <h3>{{ editando ? 'Editar Servicio' : 'Nuevo Servicio' }}</h3>
 
-  <input type="text" placeholder="Nombre" [(ngModel)]="servicio.nombre">
-  <input type="number" placeholder="Precio" [(ngModel)]="servicio.precio">
-  <input type="number" placeholder="Duración (minutos)" [(ngModel)]="servicio.duracionMinutos">
+  <div class="grid-form">
+    <input type="text" placeholder="Nombre" [(ngModel)]="servicio.nombre">
+    <input type="number" placeholder="Precio" [(ngModel)]="servicio.precio">
+    <input type="number" placeholder="Duración (minutos)" [(ngModel)]="servicio.duracionMinutos">
+  </div>
 
-  <button (click)="guardar()">Guardar</button>
+  <button class="btn guardar" (click)="guardar()">Guardar</button>
 
 </div>
 
-<table border="1">
+<div class="tabla-container">
+
+<table>
 
 <tr>
   <th>ID</th>
@@ -30,9 +36,11 @@
   <td>{{s.precio}}</td>
   <td>{{s.duracionMinutos}} min</td>
   <td>
-    <button (click)="editar(s)">Editar</button>
-    <button (click)="eliminar(s.id)">Eliminar</button>
+    <button class="btn editar" (click)="editar(s)">Editar</button>
+    <button class="btn eliminar" (click)="eliminar(s.id)">Eliminar</button>
   </td>
 </tr>
 
 </table>
+
+</div>
