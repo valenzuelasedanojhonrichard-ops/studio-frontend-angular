@@ -21,7 +21,7 @@ export class VentaService {
   }
 
   dashboard(){
-  return this.http.get<any>('http://localhost:8080/api/ventas/dashboard');
+  return this.http.get<any>(`${this.API}/api/ventas/dashboard`);
   }
 
   buscar(texto:string){
