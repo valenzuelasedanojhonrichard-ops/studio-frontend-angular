@@ -1,3 +1,3 @@
 export const API_CONFIG = {
-  url: 'http://localhost:8080/api'
+  url: 'https://hearty-success-production-2de7.up.railway.app'
 };

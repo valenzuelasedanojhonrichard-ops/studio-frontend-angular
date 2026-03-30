@@ -23,21 +23,25 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(){
 
+    // 🔥 PRIMERO ventas
     this.ventaService.dashboard().subscribe((res:any)=>{
       this.ventas = res;
-      this.crearGraficos();
-    });
 
-    this.citaService.dashboard().subscribe((res:any)=>{
-      this.citas = res;
-      this.crearGraficos();
+      // 🔥 DESPUÉS citas
+      this.citaService.dashboard().subscribe((res2:any)=>{
+        this.citas = res2;
+
+        // 🔥 RECIÉN AQUÍ crear gráficos
+        this.crearGraficos();
+      });
+
     });
 
   }
 
   crearGraficos(){
 
-    // 🔥 evitar duplicados
+    // 🔥 eliminar gráficos previos
     if(this.graficoVentas){
       this.graficoVentas.destroy();
     }
@@ -47,33 +51,41 @@ export class DashboardComponent implements OnInit {
     }
 
     // 🔥 GRAFICO VENTAS
-    this.graficoVentas = new Chart("graficoVentas", {
-      type: 'doughnut',
-      data: {
-        labels: ['Hoy', 'Mes'],
-        datasets: [{
-          data: [
-            this.ventas.ventasHoy || 0,
-            this.ventas.ventasMes || 0
-          ]
-        }]
-      }
-    });
+    const canvasVentas = document.getElementById("graficoVentas") as HTMLCanvasElement;
+
+    if(canvasVentas){
+      this.graficoVentas = new Chart(canvasVentas, {
+        type: 'doughnut',
+        data: {
+          labels: ['Hoy', 'Mes'],
+          datasets: [{
+            data: [
+              this.ventas.ventasHoy || 0,
+              this.ventas.ventasMes || 0
+            ]
+          }]
+        }
+      });
+    }
 
     // 🔥 GRAFICO CITAS
-    this.graficoCitas = new Chart("graficoCitas", {
-      type: 'doughnut',
-      data: {
-        labels: ['Reservadas', 'Atendidas', 'Canceladas'],
-        datasets: [{
-          data: [
-            this.citas.reservadas || 0,
-            this.citas.atendidas || 0,
-            this.citas.canceladas || 0
-          ]
-        }]
-      }
-    });
+    const canvasCitas = document.getElementById("graficoCitas") as HTMLCanvasElement;
+
+    if(canvasCitas){
+      this.graficoCitas = new Chart(canvasCitas, {
+        type: 'doughnut',
+        data: {
+          labels: ['Reservadas', 'Atendidas', 'Canceladas'],
+          datasets: [{
+            data: [
+              this.citas.reservadas || 0,
+              this.citas.atendidas || 0,
+              this.citas.canceladas || 0
+            ]
+          }]
+        }
+      });
+    }
 
   }
 
