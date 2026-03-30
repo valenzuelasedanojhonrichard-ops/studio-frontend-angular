@@ -23,7 +23,7 @@ export const routes: Routes = [
             .then(m => m.DashboardComponent),
             data: { rol: 'ADMIN' }
       },
-      
+
 
       {
         path: 'usuarios',

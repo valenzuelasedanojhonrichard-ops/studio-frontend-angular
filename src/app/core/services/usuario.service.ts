@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { API_CONFIG } from '../config/api.config';
 import { Observable } from 'rxjs';
 
 export interface Usuario{
@@ -12,7 +13,7 @@ export interface Usuario{
 })
 export class UsuariosService {
 
-  private api="http://localhost:8080/api/auth"
+  private api= API_CONFIG.url ;
 
   constructor(private http:HttpClient){}
 

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { VentaService } from '../../core/services/venta.service';
 import { ClienteService } from '../../core/services/cliente.service';
 import { ProductosService } from '../../core/services/productos.service';
+import { API_CONFIG } from '../../core/config/api.config';
 
 @Component({
   selector: 'app-ventas',
@@ -128,7 +129,7 @@ verDetalle(v:any){
 }
 
 descargarPDF(){
-  window.open(`http://localhost:8080/api/ventas/reporte/pdf?inicio=2026-01-01T00:00:00&fin=2026-12-31T23:59:59`);
+  window.open(API_CONFIG.url + `/api/ventas/reporte/pdf?inicio=2026-01-01T00:00:00&fin=2026-12-31T23:59:59`);
 }
 
 textoBuscar:string = '';
